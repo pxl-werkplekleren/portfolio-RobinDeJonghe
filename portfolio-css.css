@@ -1,3 +1,17 @@
+:root {
+    --page-bg: #eef1f4;
+    --surface: #ffffff;
+    --surface-soft: #f7f8fa;
+    --text: #1f2933;
+    --muted: #5f6b77;
+    --primary: #51606f;
+    --primary-dark: #35424f;
+    --accent: #b98952;
+    --line: #dde3e8;
+    --shadow-soft: 0 10px 30px rgba(31, 41, 51, 0.08);
+    --shadow-lift: 0 18px 45px rgba(31, 41, 51, 0.14);
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -5,232 +19,298 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    background-color: lightgray;
+    min-height: 100vh;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.72), rgba(238, 241, 244, 0.88)),
+        var(--page-bg);
+    color: var(--text);
+    line-height: 1.65;
 }
 
-.main-nav {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin: 30px 0;
-
+p {
+    color: var(--text);
 }
 
-.main-nav a {
-    text-decoration: none;
-    color: lightslategray;
-    font-weight: bold;
-    padding: 10px 18px;
-    border-radius: 8px;
-    background-color: white;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+a {
+    transition: color 180ms ease, background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
 }
-
-.main-nav a:hover {
-    background-color: lightslategray;
-    color: white;
-}
-
 
 .portfolio-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 30px 200px;
-    padding: 25px 40px;
-    background-color: lightslategray;
-    border-radius: 15px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+    gap: 40px;
+    max-width: 1120px;
+    margin: 32px auto 22px;
+    padding: 34px 42px;
     color: white;
+    background:
+        linear-gradient(135deg, rgba(53, 66, 79, 0.96), rgba(81, 96, 111, 0.94)),
+        var(--primary);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 14px;
+    box-shadow: var(--shadow-lift);
 }
 
 .header-text h1 {
     margin: 0;
-    font-size: 5rem;
+    font-size: clamp(3.2rem, 7vw, 5rem);
+    line-height: 1;
+    font-weight: 700;
 }
 
 .header-text h2 {
-    margin-top: 8px;
-    font-size: 2rem;
-    text-decoration: underline;
+    display: inline-block;
+    margin-top: 14px;
+    padding-bottom: 6px;
+    font-size: clamp(1.3rem, 2.6vw, 2rem);
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    border-bottom: 2px solid var(--accent);
+    text-decoration: none;
 }
 
 .header-photo img {
-    width: 250px;
-    height: 250px;
+    width: 220px;
+    height: 220px;
     object-fit: cover;
     object-position: 50% 25%;
-    border-radius: 0;
-    border: 5px solid white;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    border: 4px solid rgba(255, 255, 255, 0.92);
+    box-shadow: 0 16px 35px rgba(0, 0, 0, 0.25);
 }
 
+.main-nav {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    max-width: 1120px;
+    margin: 0 auto 44px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(221, 227, 232, 0.85);
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+    backdrop-filter: blur(10px);
+}
 
+.main-nav a {
+    text-decoration: none;
+    color: var(--primary-dark);
+    font-weight: bold;
+    padding: 10px 16px;
+    border-radius: 8px;
+    background-color: transparent;
+}
 
+.main-nav a:hover {
+    color: white;
+    background-color: var(--primary);
+    box-shadow: 0 8px 18px rgba(53, 66, 79, 0.18);
+    transform: translateY(-1px);
+}
+
+.main-nav a.active {
+    color: white;
+    background-color: var(--primary-dark);
+    box-shadow: inset 0 -2px 0 var(--accent), 0 8px 18px rgba(53, 66, 79, 0.16);
+}
+
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    width: 100%;
+    height: 4px;
+    background-color: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    box-shadow: 0 2px 10px rgba(185, 137, 82, 0.35);
+}
 
 .introductie-titel {
     display: flex;
-    margin: 50px 200px 0 200px;
-    background-color: lightslategray;
-    border-radius: 15px 15px 0 0;
-    padding: 10px;
-    color: white;
     justify-content: center;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    max-width: 980px;
+    margin: 54px auto 0;
+    padding: 14px 22px;
+    color: white;
+    background-color: var(--primary);
+    border-radius: 12px 12px 0 0;
+    box-shadow: var(--shadow-soft);
     font-size: 1rem;
 }
 
 .introductie-tekst {
     display: flex;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 28px 34px;
     text-align: center;
-    margin-left: 200px;
-    margin-right: 200px;
-    border-collapse: separate;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
-    padding: 20px;
-    border-radius: 0 0 15px 15px;
-    font-size: 1.1rem;
-
+    font-size: 1.08rem;
+    background-color: var(--surface);
+    border: 1px solid var(--line);
+    border-top: 0;
+    border-radius: 0 0 12px 12px;
+    box-shadow: var(--shadow-soft);
 }
 
 .logboek {
     max-width: 1340px;
-    margin: 40px auto;
-    padding: 20px;
+    margin: 46px auto;
+    padding: 0 20px;
+}
+
+.logboek-titel h2,
+.role h2,
+.situering-profiel h2 {
+    border-left: 5px solid var(--accent);
+    padding-left: 14px;
+    margin-bottom: 18px;
+    color: var(--primary-dark);
+    font-size: 2rem;
+    line-height: 1.25;
 }
 
 .logboek-titel h2 {
-    display: flex;
-    justify-content: flex-start;
-    border-left: 6px solid lightslategray;
-    padding: 0 0 10px 10px;
-    margin-top: 100px;
-    margin-bottom: 5px;
-    font-size: 2rem;
+    margin-top: 64px;
 }
 
+.logboek-tabel,
 .logboel-tabel {
     overflow-x: auto;
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
 }
 
 .logboek table {
     width: 100%;
-    border-collapse: separate;
-    background-color: #ffffff;
     min-width: 900px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    background-color: var(--surface);
+    border-radius: 12px;
 }
 
-.logboek thead{
-    background-color: lightslategray;
+.logboek thead,
+.competenties th {
+    background-color: var(--primary);
 }
 
 .logboek th {
-    padding: 14px 16px;
+    padding: 15px 18px;
     text-align: left;
     color: white;
-    font-size: 1.1rem;
+    font-size: 1.04rem;
 }
 
 .logboek td {
-    padding: 14px 16px;
-    font-size: 1.1rem;
-    color: black;
-    border-bottom: 1px solid #e5e7eb;
+    padding: 15px 18px;
+    font-size: 1rem;
+    color: var(--text);
+    border-bottom: 1px solid var(--line);
     vertical-align: top;
 }
 
-.logboek tbody tr:nth-child(even) {
-    background-color: #ffffff;
+.logboek tbody tr:nth-child(even),
+.competenties tbody tr:nth-child(even) {
+    background-color: var(--surface-soft);
 }
 
-.logboek tbody tr:hover {
-    background-color: lightblue;
-}
-
-.logboek table {
-    border-radius: 15px;
-    overflow: hidden;
+.logboek tbody tr:hover,
+.competenties tbody tr:hover {
+    background-color: #edf6f7;
 }
 
 .uitleg-opleiding {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: stretch;
-    gap: 50px;
-    margin: 80px auto;
-    max-width: 1340px;
-    padding: 0 40px;
+    gap: 28px;
+    max-width: 1120px;
+    margin: 72px auto;
+    padding: 0 20px;
 }
 
 .keuze-opleiding,
 .keuze-beroep {
-    width: 480px;
-    background-color: white;
-    border-radius: 16px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.8);
+    width: 100%;
+    max-width: 520px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    background-color: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+    transition: box-shadow 180ms ease, transform 180ms ease;
 }
 
-.keuze-opleiding h2 {
-    margin: 0;
-    padding: 15px;
-    background-color: lightslategray;
-    color: white;
-    text-align: center;
-    font-size: 1.4rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
-    border-radius: 15px 15px 0 0;
+.keuze-opleiding:hover,
+.keuze-beroep:hover,
+.olr-card:hover,
+.situering-card:hover {
+    box-shadow: var(--shadow-lift);
+    transform: translateY(-2px);
 }
 
+.keuze-opleiding h2,
 .keuze-beroep h2 {
     margin: 0;
-    padding: 15px;
-    background-color: lightslategray;
+    padding: 16px 20px;
     color: white;
+    background-color: var(--primary);
     text-align: center;
-    font-size: 1.4rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
-    border-radius: 15px 15px 0 0;
+    font-size: 1.25rem;
 }
 
 .keuze-opleiding p,
 .keuze-beroep p {
-    padding: 30px 32px;
+    padding: 28px 30px;
     margin: 0;
     line-height: 1.75;
-    font-size: 1.05rem;
-    color: #333;
+    font-size: 1.02rem;
+    color: var(--text);
     text-align: left;
 }
 
 .competenties {
     display: flex;
     justify-content: center;
-    padding: 2rem;
+    padding: 2rem 20px;
 }
 
 .competenties table {
     width: 100%;
     max-width: 1200px;
+    overflow: hidden;
     border-collapse: separate;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+    border-spacing: 0;
+    background-color: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
 }
 
 .competenties th,
 .competenties td {
-    padding: 0.75rem;
+    padding: 0.9rem 1rem;
     vertical-align: top;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--line);
 }
 
 .competenties th {
-    background-color: lightslategray;
     color: white;
     text-align: left;
     font-weight: bold;
@@ -242,93 +322,98 @@ body {
     font-weight: bold;
 }
 
-.competenties tbody tr:hover {
-    background-color: lightblue;
-}
-
 .rol {
     font-weight: bold;
-     background-color: #dddddd;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f6f8;
-    color: #222;
+    background-color: #e7ebef;
+    color: var(--primary-dark);
 }
 
 .role {
-    max-width: 900px;
-    margin: 40px auto;
+    max-width: 940px;
+    margin: 46px auto;
     padding: 0 20px;
 }
 
-.role h2 {
-    border-left: 6px solid lightslategray;
-    padding-left: 12px;
-}
-
 .olr-card {
-    background: #ffffff;
-    padding: 25px;
-    margin-top: 25px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    background: var(--surface);
+    padding: 28px;
+    margin-top: 22px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+    transition: box-shadow 180ms ease, transform 180ms ease;
 }
 
 .olr-card h3 {
-    color: lightslategray;
+    color: var(--primary-dark);
     margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.case-image {
+    display: block;
+    max-width: 320px;
+    width: 100%;
+    height: auto;
+    margin: 6px auto 24px;
+    padding: 16px;
+    background-color: #111820;
+    border-radius: 12px;
+    box-shadow: 0 12px 28px rgba(31, 41, 51, 0.14);
 }
 
 .reflection-header {
     display: flex;
     align-items: flex-start;
     gap: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 .reflection-icon {
     width: 50px;
     height: auto;
     flex-shrink: 0;
+    border-radius: 8px;
 }
 
 .reflection-header h3 {
     margin: 0;
 }
 
-
 .reflection h4 {
     margin-bottom: 6px;
     margin-top: 18px;
-    color: #444;
+    color: var(--primary-dark);
 }
 
 .reflection p {
     margin-top: 0;
 }
 
-
 .all-activities {
-    padding: 30px;
+    padding: 28px;
     border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
-    background-color: #ffffff;
+    background-color: var(--surface);
 }
 
 .activity-group {
     padding: 20px;
-    margin-top: 15px;
-    border-left: 6px solid lightslategray;
-    border-radius: 6px;
-    background-color: #f9f9f9;
+    margin-top: 16px;
+    border-left: 5px solid var(--primary);
+    border-radius: 8px;
+    background-color: var(--surface-soft);
+    transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.activity-group:hover {
+    background-color: #ffffff;
+    transform: translateX(3px);
 }
 
 .activity-group h4 {
     margin-top: 0;
     margin-bottom: 12px;
-    color: lightslategray;
+    color: var(--primary-dark);
 }
 
 .activity-group ol {
@@ -341,40 +426,40 @@ body {
 
 .situering-profiel {
     max-width: 1200px;
-    margin: 40px auto;
+    margin: 46px auto;
     padding: 0 20px;
 }
 
-.situering-profiel h2 {
-    border-left: 6px solid lightslategray;
-    padding-left: 12px;
-    margin-bottom: 20px;
-}
-
 .situering-card-titel {
-    font-size: 1.5rem;
-    color: lightslategray;
-    margin-bottom: 5px;
+    font-size: 1.35rem;
+    color: var(--primary-dark);
+    margin-bottom: 10px;
 }
 
 .situering-cards {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 22px;
     justify-content: center;
 }
 
 .situering-card {
-    background: #ffffff;
     width: 320px;
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.8);
-    border-left: 6px solid lightslategray;
+    padding: 24px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-left: 5px solid var(--primary);
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+    transition: box-shadow 180ms ease, transform 180ms ease;
 }
 
-.situering-card:hover {
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.8);
+.situering-card ul {
+    padding-left: 18px;
+}
+
+.situering-card li {
+    margin-bottom: 10px;
 }
 
 .x-factor-header {
@@ -384,15 +469,169 @@ body {
 .terug-naar-boven {
     display: flex;
     justify-content: center;
-    font-size: 1.5rem;
+    width: fit-content;
+    margin: 44px auto 24px;
+    padding: 10px 18px;
+    color: var(--primary-dark);
+    background-color: rgba(255, 255, 255, 0.76);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
     text-decoration: none;
-    margin-bottom: 15px;
+    box-shadow: var(--shadow-soft);
+    transition: opacity 180ms ease, transform 180ms ease, color 180ms ease, background-color 180ms ease;
+}
+
+.terug-naar-boven:hover {
+    color: white;
+    background-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.terug-naar-boven.is-floating {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 12;
+    margin: 0;
+}
+
+.js-reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 420ms ease, transform 420ms ease;
+}
+
+.js-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pdf-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 18px;
+    color: white;
+    background-color: var(--primary);
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 8px 18px rgba(53, 66, 79, 0.18);
+}
+
+.pdf-link:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-1px);
+}
+
+.activity-group.designer,
+.situering-card.designer {
+    border-color: #c77755;
+}
+
+.activity-group.programmer,
+.situering-card.programmer {
+    border-color: #407ea7;
+}
+
+.activity-group.tester,
+.situering-card.tester {
+    border-color: #4f9b6e;
+}
+
+.activity-group.communicator,
+.situering-card.communicator {
+    border-color: #b45d82;
+}
+
+.activity-group.lifelong,
+.situering-card.lifelong {
+    border-color: #c28a35;
 }
 
 
-.activity-group.designer { border-color: #ff7f50; }
-.activity-group.programmer { border-color: #1e90ff; }
-.activity-group.tester { border-color: #32cd32; }
-.activity-group.communicator { border-color: #ff69b4; }
-.activity-group.lifelong { border-color: #ffa500; }
+
+@media (max-width: 900px) {
+    .portfolio-header {
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 18px 16px 16px;
+        padding: 28px;
+    }
+
+    .header-photo img {
+        width: 180px;
+        height: 180px;
+    }
+
+    .main-nav {
+        position: static;
+        margin: 0 16px 34px;
+    }
+
+    .uitleg-opleiding {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media (max-width: 640px) {
+    .portfolio-header {
+        padding: 24px;
+    }
+
+    .header-text h1 {
+        font-size: 3rem;
+    }
+
+    .header-photo img {
+        width: 150px;
+        height: 150px;
+    }
+
+    .main-nav {
+        justify-content: flex-start;
+        overflow-x: auto;
+        flex-wrap: nowrap;
+    }
+
+    .main-nav a {
+        flex: 0 0 auto;
+        padding: 9px 12px;
+        font-size: 0.9rem;
+    }
+
+    .introductie-titel,
+    .introductie-tekst {
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+
+    .introductie-tekst,
+    .olr-card,
+    .all-activities,
+    .situering-card {
+        padding: 20px;
+    }
+
+    .role h2,
+    .logboek-titel h2,
+    .situering-profiel h2 {
+        font-size: 1.55rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    a,
+    .js-reveal,
+    .terug-naar-boven {
+        transition: none;
+    }
+}
+
 
